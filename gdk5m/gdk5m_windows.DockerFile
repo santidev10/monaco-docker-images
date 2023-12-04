@@ -6,16 +6,16 @@ FROM mcr.microsoft.com/windows/servercore:ltsc2022
 SHELL ["cmd", "/S", "/C"]
 
 # Download channel for fixed install.
-ARG CHANNEL_URL=https://aka.ms/vs/17/release/channel
+ARG CHANNEL_URL=https://aka.ms/vs/16/release/channel
 ADD ${CHANNEL_URL} C:\TEMP\VisualStudio.chman
 
 RUN `
     # Download the Build Tools bootstrapper.
-    curl -SL --output vs_buildtools.exe https://aka.ms/vs/17/release/vs_buildtools.exe `
+    curl -SL --output vs_buildtools.exe https://aka.ms/vs/16/release/vs_buildtools.exe `
     `
     # Install Build Tools with the Microsoft.VisualStudio.Workload.AzureBuildTools workload, excluding workloads and components with known issues.
     && (start /w vs_buildtools.exe --quiet --wait --norestart --nocache `
-        --installPath "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\BuildTools" `
+        --installPath "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools" `
         --channelUri C:\TEMP\VisualStudio.chman `
         --installChannelUri C:\TEMP\VisualStudio.chman `
         --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended`
@@ -27,4 +27,4 @@ RUN `
     && del /q vs_buildtools.exe
 
 # TODO Install Alablas-cli
-ENTRYPOINT ["C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat", "&&", "powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass"]
+ENTRYPOINT ["C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\Common7\\Tools\\VsDevCmd.bat", "&&", "powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass"]
