@@ -16,4 +16,4 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         dockerfile: gdk5m/gdk5m_linux.Dockerfile
-        tag: gdk5l_linux
+        tag: latest 
