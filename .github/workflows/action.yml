@@ -12,7 +12,7 @@ jobs:
       uses: mr-smithers-excellent/docker-build-push@v6
       with:
         image: santi10/ciregistryocto
-        tag: latest 
+        tags: latest 
         registry: docker.io
         dockerfile: gdk5m/gdk5m_linux.Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
