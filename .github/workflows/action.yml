@@ -1,4 +1,4 @@
-on:
+on: # build docker images
   push:
     branches: [main]
 
